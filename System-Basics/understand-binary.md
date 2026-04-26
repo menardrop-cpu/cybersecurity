@@ -8,7 +8,7 @@
 
 ## 1. Computers Are Just 1s and 0s
 
-Tout ce qu'un ordinateur fait — afficher une image, jouer de la musique, envoyer un email, exécuter un malware — se résume à une seule réalité physique : de l'électricité qui passe ou qui ne passe pas.
+Tout ce qu'un ordinateur fait afficher une image, jouer de la musique, envoyer un email, exécuter un malware, e résume à une seule réalité physique : de l'électricité qui passe ou qui ne passe pas.
 
 Un transistor est un minuscule composant électronique qui agit comme un interrupteur :
 
@@ -21,7 +21,7 @@ Un CPU moderne contient des **milliards** de ces transistors. En les combinant e
 
 ### Le bit et l'octet
 
-La plus petite unité d'information est le **bit** (binary digit) — un seul 1 ou 0.
+La plus petite unité d'information est le **bit** (binary digit), un seul 1 ou 0.
 
 En pratique, les bits sont regroupés en **octets** (bytes) de 8 bits :
 
@@ -36,7 +36,7 @@ Avec 8 bits, on peut représenter 2⁸ = **256 combinaisons différentes** (de 0
 
 On aurait pu concevoir des ordinateurs avec 3 états (ternaire) ou 10 états (décimal). En pratique, 2 états c'est ce qu'il y a de plus simple et de plus fiable à implémenter physiquement. Un transistor fiable à 2 états est trivial à fabriquer. Un composant fiable à 10 états distincts est exponentiellement plus complexe et plus sujet aux erreurs.
 
-Le binaire n'est pas un choix arbitraire — c'est la solution d'ingénierie la plus robuste possible.
+Le binaire n'est pas un choix arbitraire, c'est la solution d'ingénierie la plus robuste possible.
 
 ---
 
@@ -135,7 +135,7 @@ Sortie de `xxd hello.txt` :
 
 ### Pourquoi c'est important en cybersécurité
 
-Tout fichier est une séquence d'octets. Un malware est une séquence d'octets. Un fichier PDF infecté est un PDF normal avec une séquence d'octets malveillants ajoutée. Les antivirus fonctionnent en cherchant des **signatures** — des séquences d'octets caractéristiques — dans les fichiers. C'est pour ça qu'on peut analyser un fichier sans l'exécuter : on lit directement ses octets.
+Tout fichier est une séquence d'octets. Un malware est une séquence d'octets. Un fichier PDF infecté est un PDF normal avec une séquence d'octets malveillants ajoutée. Les antivirus fonctionnent en cherchant des **signatures** (des séquences d'octets caractéristiques) dans les fichiers. C'est pour ça qu'on peut analyser un fichier sans l'exécuter : on lit directement ses octets.
 
 ---
 
@@ -180,17 +180,17 @@ code.java  →  compilateur  →  bytecode  →  JVM  →  CPU
 
 ### Ce que ça signifie pour la sécurité
 
-* Un **reverse engineer** prend un exécutable binaire et remonte vers un code lisible — c'est ce que fait l'analyse de malwares
+* Un **reverse engineer** prend un exécutable binaire et remonte vers un code lisible,c'est ce que fait l'analyse de malwares
 * Un **décompilateur** comme Ghidra ou IDA Pro lit les bytes d'un programme et reconstruit une représentation du code original
-* Les **CVE de type buffer overflow** exploitent directement la façon dont le code machine gère la mémoire — compréhension du binaire indispensable
+* Les **CVE de type buffer overflow** exploitent directement la façon dont le code machine gère la mémoire, compréhension du binaire indispensable
 
 ---
 
-## 5. Binary Translation — Base 10 to Base 2
+## 5. Binary Translation : Base 10 to Base 2
 
 ### Comprendre les bases numériques
 
-Le système décimal (base 10) qu'on utilise au quotidien n'a rien de naturel — c'est une convention liée au fait qu'on a 10 doigts. Un système en base N utilise N symboles distincts et fonctionne par puissances de N.
+Le système décimal (base 10) qu'on utilise au quotidien n'a rien de naturel, c'est une convention liée au fait qu'on a 10 doigts. Un système en base N utilise N symboles distincts et fonctionne par puissances de N.
 
 **Base 10 (décimal)** : symboles 0–9, puissances de 10
 
