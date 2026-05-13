@@ -1,5 +1,5 @@
 # jedha-courses
-🛡️ Jedha Cybersecurity — Notes de cours
+🛡️ Jedha Cybersecurity | Notes de cours
 Formation : Essentials + Fullstack + Lead
 Titre visé : RNCP Niveau 6 — Administrateur d'infrastructures sécurisées
 Début : Avril 2026
