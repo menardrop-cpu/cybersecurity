@@ -568,9 +568,3 @@ dig example.com +stats
 nslookup example.com
 nslookup -type=MX example.com
 ```
-
----
-
-**Auteur:** Pierre | **Formation:** Jedha Essentials + Fullstack (2026)  
-**Dernière mise à jour:** Mai 2026  
-**Niveau:** Débutant / Intermédiaire
