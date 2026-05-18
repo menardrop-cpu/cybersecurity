@@ -1,192 +1,161 @@
-# Threat Intelligence & APT Analysis — Mon Apprentissage
+# Threat intelligence & APT analysis — mon apprentissage
 
-**Module** : Introduction to Threat Intelligence  
-**Exercice** : NorthBank Financial Group Incident Analysis  
-**Date** : 18 Mai 2026  
+**Module**: Introduction to threat intelligence  
+**Exercice**: Northbank financial group incident analysis  
+**Date**: mai 2026  
+**Statut**: ✓ complété
 
 ---
 
-## Ce Que J'Ai Appris
+## Ce que j'ai appris
 
-Cet exercice m'a enseigné comment analyser une **attaque réelle** en utilisant :
+Cet exercice m'a enseigné comment analyser une **attaque réelle** en utilisant:
 - Les frameworks MITRE ATT&CK
-- Les techniques de Threat Intelligence
+- Les techniques de threat intelligence
 - L'identification des APTs
 - La cartographie des comportements aux TTPs
 
 ---
 
-# PARTIE 1 : COMPRENDRE L'INCIDENT
+# Partie 1: Comprendre l'incident
 
-## Résumé De L'Attaque
+## Résumé de l'attaque
 
-Une attaque sophistiquée contre **NorthBank Financial Group** attribuée à **APT29 (Cozy Bear)**, un groupe d'espionnage russe. L'objectif : accéder aux données financières sensibles via une compromission multi-étapes.
+Une attaque sophistiquée contre **Northbank financial group** attribuée à **APT29 (Cozy Bear)**, un groupe d'espionnage russe. L'objectif: accéder aux données financières sensibles via une compromission multi-étapes.
 
-## La Chaîne D'Exploitation
+## La chaîne d'exploitation
 
 ```
-Spear-Phishing Email
+Spear-phishing email
     ↓
-Malicious Attachment (security_patch_update.exe)
+Malicious attachment (security_patch_update.exe)
     ↓
-PowerShell Execution (T1059.001)
+PowerShell execution (T1059.001)
     ↓
-Remote Payload Download
+Remote payload download
     ↓
-Scheduled Task Persistence (T1053.005)
+Scheduled task persistence (T1053.005)
     ↓
-Credential Harvesting via Kerberoasting (T1003.003)
+Credential harvesting via Kerberoasting (T1003.003)
     ↓
-Lateral Movement (T1047 - WMI)
+Lateral movement (T1047 - WMI)
     ↓
-C2 Communication (T1071.001)
+C2 communication (T1071.001)
     ↓
-Data Exfiltration (T1041)
+Data exfiltration (T1041)
 ```
 
 ---
 
-# PARTIE 2 : IDENTIFIER LES INDICATEURS DE COMPROMISSION (IoCs)
+# Partie 2: Identifier les indicateurs de compromission (IoCs)
 
-## Qu'Est-Ce Qu'Un IoC?
+## Qu'est-ce qu'un IoC?
 
-Un **Indicator of Compromise** est une pièce de preuve qu'un attaquant a été actif sur ton réseau. C'est comme une empreinte digitale laissée sur une scène de crime.
+Un **Indicator of compromise** est une pièce de preuve qu'un attaquant a été actif sur ton réseau. C'est comme une empreinte digitale laissée sur une scène de crime.
 
-## Les IoCs Trouvés Dans L'Exercice
+## Les IoCs trouvés dans l'exercice
 
 | Type | Valeur | Signification |
 |------|--------|---------------|
-| **Fichier Malveillant** | security_patch_update.exe | Attachment de phishing |
-| **SHA-1 Hash** | d4411f70e0dcc2f88d74ae7251d51c6676075f6f | Identification unique du malware |
-| **Domaine Malveillant** | hxxp://update-secure.com | Source du payload |
+| **Fichier malveillant** | security_patch_update.exe | Attachment de phishing |
+| **SHA-1 hash** | d4411f70e0dcc2f88d74ae7251d51c6676075f6f | Identification unique du malware |
+| **Domaine malveillant** | hxxp://update-secure.com | Source du payload |
 | **Serveur C2** | 185.220.101.3 | Communication attaquant-victime |
-| **IP Exfiltration** | 185.220.101.3 (port 443) | Données volées envoyées ici |
-| **Tâche Planifiée** | SystemUpdateChecker | Persistence mechanism |
-| **Compte Compromis** | svc-finance-admin | Credentials escaladées |
+| **IP exfiltration** | 185.220.101.3 (port 443) | Données volées envoyées ici |
+| **Tâche planifiée** | SystemUpdateChecker | Persistence mechanism |
+| **Compte compromis** | svc-finance-admin | Credentials escaladées |
 | **Domaine C2** | secure-finance-check.com | Alternative masquée pour C2 |
 
-### Pourquoi Ces IoCs Sont Critiques?
+### Pourquoi ces IoCs sont critiques?
 
-- **Hashes** : Identifient précisément le malware (impossible à changer)
-- **Domaines & IPs** : Permettent de bloquer la communication C2
-- **Tâches Planifiées** : Révèlent les mécanismes de persistance
-- **Comptes Compromis** : Montrent où l'attaquant a escaladé ses privilèges
+Les hashes identifient précisément le malware (impossible à changer). Les domaines et IPs permettent de bloquer la communication C2. Les tâches planifiées révèlent les mécanismes de persistance. Les comptes compromis montrent où l'attaquant a escaladé ses privilèges.
 
 ---
 
-# PARTIE 3 : MAPPER LES COMPORTEMENTS AUX MITRE ATT&CK TTPs
+# Partie 3: Mapper les comportements aux MITRE ATT&CK TTPs
 
-## Étape 1 : Identifier Le Comportement
+## Étape 1: Identifier le comportement
 
-L'attaquant a exécuté une commande PowerShell encodée en Base64 :
+L'attaquant a exécuté une commande PowerShell encodée en Base64:
 ```
 powershell.exe -enc JABsAG8AYwBhAGwA...
 ```
 
-**Question** : Qu'est-ce que le système essaie de faire?
-→ **Réponse** : Exécuter du code en cachant son contenu via l'encoding.
+**Question**: Qu'est-ce que le système essaie de faire?
+→ **Réponse**: Exécuter du code en cachant son contenu via l'encoding.
 
-## Étape 2 : Rechercher La Tactic
+## Étape 2: Rechercher la tactic
 
-**Questions à poser :**
-- Est-ce que l'attaquant essaie de RUN du code? → **OUI**
-- Est-ce que c'est dans la phase d'exploitation initiale? → **OUI**
+**Questions à poser**:
+- Est-ce que l'attaquant essaie de RUN du code? → **Oui**
+- Est-ce que c'est dans la phase d'exploitation initiale? → **Oui**
 
-**Tactic Mapped** : TA0002 (Execution)
+**Tactic mapped**: TA0002 (Execution)
 
-## Étape 3 : Identifier La Technique Exacte
+## Étape 3: Identifier la technique exacte
 
-Dans le framework MITRE, il existe une technique spécifique :
-**T1059.001 — Command and Scripting Interpreter: PowerShell**
+Dans le framework MITRE, il existe une technique spécifique:
+**T1059.001 — Command and scripting interpreter: PowerShell**
 
-Pourquoi cette technique?
-- L'attaquant utilise PowerShell (interpréteur de commandes)
-- L'encoding (-enc) cache le contenu pour éviter la détection
-
-## Étape 4 : Résultat Du Mapping
-
-```
-Comportement Observé              Tactic         Technique
-═════════════════════════════════════════════════════════════
-PowerShell encodé                Execution      T1059.001
-Téléchargement de payload        Execution      T1105
-Création de scheduled task       Persistence    T1053.005
-Kerberoasting                    Credential Acc T1003.003
-WMI remote execution             Lateral Movem  T1047
-Encrypted C2 connection          C&C            T1071.001
-Exfiltration SSH over port 443   Exfiltration   T1041
-```
+Pourquoi cette technique? L'attaquant utilise PowerShell (interpréteur de commandes). L'encoding (-enc) cache le contenu pour éviter la détection.
 
 ---
 
-# PARTIE 4 : IDENTIFIER L'APT
+# Partie 4: Identifier l'APT
 
-## Qui Est APT29 (Cozy Bear)?
+## Qui est APT29 (Cozy Bear)?
 
-**Pays d'Origine** : 🇷🇺 Russie  
-**Type** : Nation-State APT (espionnage gouvernemental)  
-**Naming Convention** : 
-- Crowdstrike : Cozy Bear
-- FireEye : APT29
+**Pays d'origine**: 🇷🇺 Russie  
+**Type**: Nation-state APT (espionnage gouvernemental)  
+**Noms alternatifs**: Cozy Bear (Crowdstrike), APT29 (FireEye), Nobelium (Microsoft)
 
-**Motivations** : 
+**Motivations**:
 - Cyber espionnage (intelligence gathering)
 - Accès aux données sensibles gouvernementales et privées
 
-**TTPs Caractéristiques D'APT29** :
+**TTPs caractéristiques d'APT29**:
 - PowerShell obfusqué
 - Persistence via scheduled tasks
 - Lateral movement sophistiqué
 - Exfiltration sur C2 chiffré
 
-## Pourquoi C'Est APT29?
-
-L'exercice dit directement : "similarities with previous attacks linked to APT29"
-
-Les similarités incluent :
-1. **Technique de phishing** : Spear-phishing sophistiquée
-2. **Payload staging** : Téléchargement de payload secondaire
-3. **PowerShell usage** : Encodage pour éviter la détection
-4. **C2 communication** : HTTPS chiffré pour masquer la comm
-5. **Data exfiltration** : Volume important de données sensibles
-
 ---
 
-# PARTIE 5 : MITRE ATT&CK FRAMEWORK — LES TACITCS
+# Partie 5: MITRE ATT&CK framework — les tactics
 
-## Les 14 Tactics Du Framework Enterprise
+## Les 14 tactics du framework enterprise
 
-| ID | Tactic | Description | Utilisée Ici? |
+| ID | Tactic | Description | Utilisée ici? |
 |----|---------|-----------|----|
-| TA0043 | Reconnaissance | Gather info pour planifier | ❌ Non |
-| TA0042 | Resource Development | Créer infrastructure | ✅ Oui (domaine enregistré) |
-| TA0001 | Initial Access | Entrer le réseau | ✅ Oui (phishing) |
-| TA0002 | Execution | Exécuter du code | ✅ Oui (PowerShell) |
-| TA0003 | Persistence | Maintenir l'accès | ✅ Oui (scheduled task) |
-| TA0004 | Privilege Escalation | Gagner plus de droits | ✅ Oui (Kerberoasting) |
-| TA0005 | Defense Evasion | Éviter la détection | ✅ Oui (encoding) |
-| TA0006 | Credential Access | Voler des credentials | ✅ Oui (credential harvest) |
-| TA0007 | Discovery | Scanner l'environnement | ❌ Non mentionné |
-| TA0008 | Lateral Movement | Bouger dans le réseau | ✅ Oui (WMI) |
-| TA0009 | Collection | Collecter les données | ✅ Oui (données financières) |
-| TA0011 | Command & Control | Communiquer avec C2 | ✅ Oui (HTTPS C2) |
-| TA0010 | Exfiltration | Voler les données | ✅ Oui (SSH over 443) |
-| TA0040 | Impact | Détruire/disrupter | ❌ Non (c'est du vol) |
+| TA0043 | Reconnaissance | Gather info pour planifier | ✗ Non |
+| TA0042 | Resource development | Créer infrastructure | ✓ Oui (domaine enregistré) |
+| TA0001 | Initial access | Entrer le réseau | ✓ Oui (phishing) |
+| TA0002 | Execution | Exécuter du code | ✓ Oui (PowerShell) |
+| TA0003 | Persistence | Maintenir l'accès | ✓ Oui (scheduled task) |
+| TA0004 | Privilege escalation | Gagner plus de droits | ✓ Oui (Kerberoasting) |
+| TA0005 | Defense evasion | Éviter la détection | ✓ Oui (encoding) |
+| TA0006 | Credential access | Voler des credentials | ✓ Oui (credential harvest) |
+| TA0007 | Discovery | Scanner l'environnement | ✗ Non mentionné |
+| TA0008 | Lateral movement | Bouger dans le réseau | ✓ Oui (WMI) |
+| TA0009 | Collection | Collecter les données | ✓ Oui (données financières) |
+| TA0011 | Command & control | Communiquer avec C2 | ✓ Oui (HTTPS C2) |
+| TA0010 | Exfiltration | Voler les données | ✓ Oui (SSH over 443) |
+| TA0040 | Impact | Détruire/disrupter | ✗ Non (c'est du vol) |
 
 ---
 
-# PARTIE 6 : COMPRENDRE LA PYRAMID OF PAIN
+# Partie 6: Comprendre la pyramid of pain
 
-## Qu'Est-Ce Que La Pyramid Of Pain?
+## Qu'est-ce que la pyramid of pain?
 
-Un concept montrant à quel point il est difficile pour un attaquant de CHANGER ses indicateurs :
+Un concept montrant à quel point il est difficile pour un attaquant de CHANGER ses indicateurs:
 
 ```
           HARD TO CHANGE
                  ▲
                  │
           ┌──────────────┐
-          │   TTPs       │  ← Tactics, Techniques, Procedures
+          │   TTPs       │  ← Tactics, techniques, procedures
           │ (Hardest)    │     (Prennent des années à développer)
           └──────────────┘
                  │
@@ -196,125 +165,99 @@ Un concept montrant à quel point il est difficile pour un attaquant de CHANGER 
           └──────────────┘
                  │
           ┌──────────────┐
-          │   Network    │  ← IPs, Domains
-          │ Artifacts    │     (Heures à jours pour changer)
+          │   Network    │  ← IPs, domains
+          │ artifacts    │     (Heures à jours pour changer)
           └──────────────┘
                  │
           ┌──────────────┐
-          │   File       │  ← Hashes, File names
-          │  Hashes      │     (Quelques secondes pour changer)
+          │   File       │  ← Hashes, file names
+          │  hashes      │     (Quelques secondes pour changer)
           └──────────────┘
                  ▼
            EASY TO CHANGE
 ```
 
-### Application À Notre Exercice
+### Application à notre exercice
 
-**Faciles à changer :**
+**Faciles à changer**:
 - Hash du fichier (d4411f70...) → Changer 1 byte = nouveau hash
 - Domaine (update-secure.com) → Enregistrer un nouveau domaine en quelques minutes
 
-**Difficiles à changer :**
+**Difficiles à changer**:
 - TTPs (PowerShell obfusqué, Kerberoasting, persistence via scheduled task)
 - Ces techniques prennent **des années** à développer
 
-**Conclusion** : En se concentrant sur les **TTPs** plutôt que les IoCs, on construit une défense beaucoup plus robuste.
+**Conclusion**: En se concentrant sur les **TTPs** plutôt que les IoCs, on construit une défense beaucoup plus robuste.
 
 ---
 
-# PARTIE 7 : LES QUESTIONS DE L'EXERCICE RÉPONDUES
+# Partie 7: Les questions de l'exercice répondues
 
-## Q1: Quel Est Le Nom Du Fichier Malveillant?
-**Réponse** : security_patch_update.exe  
-**Pourquoi** : Spoofé comme une mise à jour système pour leurrer l'utilisateur.
+## Q1: Quel est le nom du fichier malveillant?
+**Réponse**: security_patch_update.exe  
+**Pourquoi**: Spoofé comme une mise à jour système pour leurrer l'utilisateur.
 
-## Q2: Quel APT Est Responsable?
-**Réponse** : APT29 (Cozy Bear)  
-**Pourquoi** : Mêmes TTPs que les attaques précédentes d'APT29 (nation-state russe).
+## Q2: Quel APT est responsable?
+**Réponse**: APT29 (Cozy Bear)  
+**Pourquoi**: Mêmes TTPs que les attaques précédentes d'APT29 (nation-state russe).
 
-## Q3: Type D'Attaque Pour L'Accès Initial (MITRE ID)?
-**Réponse** : T1566.001 (Spear-Phishing Attachment)  
-**Pourquoi** : Email phishing + pièce jointe malveillante = accès initial.
+## Q3: Type d'attaque pour l'accès initial (MITRE ID)?
+**Réponse**: T1566.001 (Spear-phishing attachment)  
+**Pourquoi**: Email phishing + pièce jointe malveillante = accès initial.
 
-## Q4: Hash SHA-1 Du Malware?
-**Réponse** : d4411f70e0dcc2f88d74ae7251d51c6676075f6f  
-**Pourquoi** : Identifiant unique du fichier malveillant pour le tracker.
+## Q4: Hash SHA-1 du malware?
+**Réponse**: d4411f70e0dcc2f88d74ae7251d51c6676075f6f  
+**Pourquoi**: Identifiant unique du fichier malveillant pour le tracker.
 
-## Q5: Autre Nom D'Exécutable Associé au Hash (VirusTotal)?
-**Réponse** : 620d2bf14fe345eef618fdd1dac242b3a0bb65ccb75699fe00f7c671f2c1d869.exe  
-**Pourquoi** : Le malware a circulé sous plusieurs noms (même payload, noms différents).
+## Q5: Autre nom d'exécutable associé au hash (VirusTotal)?
+**Réponse**: 620d2bf14fe345eef618fdd1dac242b3a0bb65ccb75699fe00f7c671f2c1d869.exe  
+**Pourquoi**: Le malware a circulé sous plusieurs noms (même payload, noms différents).
 
-## Q6: Type De Machines Ciblées?
-**Réponse** : x64  
-**Pourquoi** : Le malware est compilé pour architecture 64-bit (systèmes modernes).
+## Q6: Type de machines ciblées?
+**Réponse**: x64  
+**Pourquoi**: Le malware est compilé pour architecture 64-bit (systèmes modernes).
 
-## Q7: MITRE Technique Pour Vol De Credentials?
-**Réponse** : T1003.003 (Kerberoasting)  
-**Pourquoi** : Extraction de hashes de comptes de service depuis Active Directory.
+## Q7: MITRE technique pour vol de credentials?
+**Réponse**: T1003.003 (Kerberoasting)  
+**Pourquoi**: Extraction de hashes de comptes de service depuis active directory.
 
-## Q8: Nom De La Tâche De Persistance?
-**Réponse** : SystemUpdateChecker  
-**Pourquoi** : Scheduled task qui s'exécute tous les 6h pour maintenir l'accès.
+## Q8: Nom de la tâche de persistance?
+**Réponse**: SystemUpdateChecker  
+**Pourquoi**: Scheduled task qui s'exécute tous les 6h pour maintenir l'accès.
 
-## Q9: Port Pour L'Exfiltration Chiffrée?
-**Réponse** : 443  
-**Pourquoi** : SSH tunnel sur HTTPS (port 443) pour masquer le trafic comme du web normal.
+## Q9: Port pour l'exfiltration chiffrée?
+**Réponse**: 443  
+**Pourquoi**: SSH tunnel sur HTTPS (port 443) pour masquer le trafic comme du web normal.
 
-## Q10: Domaine Complet Du Serveur C2?
-**Réponse** : secure-finance-check.com  
-**Pourquoi** : Utilisé pour communiquer avec les systèmes compromis.
+## Q10: Domaine complet du serveur C2?
+**Réponse**: secure-finance-check.com  
+**Pourquoi**: Utilisé pour communiquer avec les systèmes compromis.
 
 ---
 
-# PARTIE 8 : CE QUE J'AI APPRIS
+# Partie 8: Ce que j'ai appris
 
-## 1. Les IoCs Sont Des Empreintes Digitales
+## 1. Les IoCs sont des empreintes digitales
 
-Chaque attaque laisse des traces :
-- **Hashes** : Identification du malware
-- **IPs/Domaines** : Infrastructure de l'attaquant
-- **Tâches planifiées** : Mécanismes de persistance
-- **Comptes compromis** : Escalade de privilèges
+Chaque attaque laisse des traces: hashes (identification du malware), IPs/domaines (infrastructure), tâches planifiées (persistance), comptes compromis (escalade de privilèges).
 
-Rassembler ces IoCs permet de :
-- Bloquer les attaques futures
-- Partager l'intelligence avec d'autres organisations
-- Documenter la menace
+Rassembler ces IoCs permet de bloquer les attaques futures, partager l'intelligence avec d'autres organisations, et documenter la menace.
 
-## 2. MITRE ATT&CK = Langage Commun
+## 2. MITRE ATT&CK = langage commun
 
-Au lieu de dire "l'attaquant a utilisé du PowerShell obfusqué", on dit **T1059.001**.
+Au lieu de dire "l'attaquant a utilisé du PowerShell obfusqué", on dit **T1059.001**. Les équipes techniques et non-techniques comprennent. C'est compatible avec les outils SIEM et EDR. C'est une référence mondiale pour les TTPs.
 
-Avantage :
-- Les équipes techniques et non-techniques comprennent
-- Compatible avec les outils SIEM et EDR
-- Référence mondiale pour les TTPs
+## 3. Les TTPs > les IoCs
 
-## 3. Les TTPs > Les IoCs
+Un hash change en 1 seconde. Une TTP (technique) prend **des années** à développer. Donc: ne bloque pas juste les hashes, détecte les COMPORTEMENTS (TTPs), construit des défenses génériques contre les techniques.
 
-Un hash change en 1 seconde.
-Une TTP (technique) prend **des années** à développer.
+## 4. APT29 = espionnage d'état
 
-Donc :
-- Ne bloque pas juste les hashes
-- Détecte les COMPORTEMENTS (TTPs)
-- Construit des défenses génériques contre les techniques
+APT29 n'est pas un cyber-criminel cherchant du profit. C'est un **groupe d'espionnage gouvernemental russe**. Ressources illimitées, compétences très avancées, objectif: voler de l'intelligence gouvernementale et financière, patience: peut rester des **mois** sans être détecté.
 
-## 4. APT29 = Espionnage D'État
+## 5. La chaîne d'exploitation est progressive
 
-APT29 n'est pas un cyber-criminel cherchant du profit.
-C'est un **groupe d'espionnage gouvernemental russe**.
-
-Implications :
-- Ressources illimitées
-- Compétences très avancées
-- Objectif : voler de l'intelligence (données gouvernementales, financières)
-- Patience : peut rester des **mois** sans être détecté
-
-## 5. La Chaîne D'Exploitation Est Progressive
-
-L'attaquant ne devient pas admin au jour 1.
-C'est une progression :
+L'attaquant ne devient pas admin au jour 1. C'est une progression:
 1. Phishing → Foothold
 2. PowerShell → Exécution
 3. Scheduled task → Persistance
@@ -327,67 +270,14 @@ Chaque étape ajoute de la complexité mais aussi réduit la détection.
 
 ---
 
-# PARTIE 9 : APPLICATION PRATIQUE
+**Status**: ✓ Exercice compris et maîtrisé
 
-## Si Je Trouvais Cette Attaque...
+**Ce que j'ai appris**: Comment analyser une attaque réelle, mapper aux TTPs, identifier les APTs
 
-### Step 1 : Collecter Les IoCs
-```
-✅ Chercher tous les fichiers avec le hash d4411f70...
-✅ Bloquer les IPs 185.220.101.3
-✅ Bloquer les domaines malveillants
-✅ Trouver toutes les instances de "SystemUpdateChecker"
-```
+**Utilité**: 5/5
 
-### Step 2 : Mapper Aux TTPs
-```
-✅ T1059.001 → Auditer l'utilisation de PowerShell (logs)
-✅ T1003.003 → Surveiller les Kerberoasting attempts
-✅ T1053.005 → Chercher les scheduled tasks suspectes
-✅ T1047 → Détecter les WMI calls distantes
-```
-
-### Step 3 : Défendre
-```
-✅ MFA sur tous les comptes de service
-✅ Logging PowerShell avancé
-✅ EDR pour détecter les comportements
-✅ Restreindre WMI à distance
-✅ Monitorer les connexions C2
-```
+**Application**: Incident response, threat hunting, detection engineering
 
 ---
 
-# RÉSUMÉ : La Méthode Complète
-
-```
-1. ANALYSER L'INCIDENT
-   ├─ Identifier les IoCs
-   ├─ Tracer la progression de l'attaque
-   └─ Documenter la timeline
-
-2. MAPPER AUX MITRE ATT&CK
-   ├─ Identifier les Tactics (pourquoi)
-   ├─ Identifier les Techniques (comment)
-   └─ Identifier les Procedures (avec quoi)
-
-3. IDENTIFIER L'APT
-   ├─ Chercher les similarités TTPs
-   ├─ Vérifier les motivations
-   └─ Corréler avec d'autres attaques connues
-
-4. CRÉER L'INTELLIGENCE
-   ├─ Documenter les TTPs découvertes
-   ├─ Partager avec l'industrie
-   └─ Mettre à jour les défenses
-```
-
----
-
-**Status** : ✅ EXERCICE COMPRIS ET MAÎTRISÉ
-
-**Compétences** : Comment analyser une attaque réelle, mapper aux TTPs, identifier les APTs
-
-**Application** : Incident Response, Threat Hunting, Detection Engineering
-
-
+La vraie victoire ce n'est pas de bloquer un hash. C'est de comprendre les COMPORTEMENTS d'un attaquant pour construire une défense qui fonctionne contre tous ses variants.
