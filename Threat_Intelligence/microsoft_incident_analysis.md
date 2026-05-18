@@ -1,4 +1,4 @@
-# Microsoft midnight blizzard incident — threat intelligence analysis
+# Microsoft midnight blizzard incident threat intelligence analysis
 
 **Incident**: Nation-state attack on microsoft corporate systems  
 **Date détectée**: January 12, 2024  
