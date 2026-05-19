@@ -4,7 +4,7 @@ Ce dépôt centralise mes travaux pratiques, mes scripts d'automatisation et mes
 
 ---
 
-## 🛠️ Architecture du Laboratoire
+## Structure
 
 Le dépôt est organisé par blocs de compétences afin de maintenir une vision claire et scannable des technologies maîtrisées :
 
@@ -15,7 +15,7 @@ Le dépôt est organisé par blocs de compétences afin de maintenir une vision 
 
 ---
 
-## 💻 Environnement Technique
+## Environnement Technique
 
 Tous les outils et scripts présents ici sont testés et optimisés pour l'architecture suivante :
 * **OS** : macOS (Architecture ARM64 / Puce M3)
@@ -25,14 +25,13 @@ Tous les outils et scripts présents ici sont testés et optimisés pour l'archi
 
 ---
 
-## 📈 Objectifs de R&D
+## Objectifs de R&D
 
 1. **Maîtrise Technique (Fullstack)** : Développer des réflexes solides en programmation et en exploitation pour comprendre la logique sous-jacente des vulnérabilités.
 2. **Posture d'Auditeur (Lead)** : Ne pas se contenter de détecter une anomalie, mais savoir documenter son cheminement ("Le Comment") et évaluer ses conséquences financières, juridiques ou réputationnelles pour une organisation ("L'Impact").
 
-> 💡 *Note : Une partie des travaux et des labs présentés ici a été initiée et validée dans le cadre de mon cursus intensif Cybersecurity Fullstack & Lead chez Jedha Bootcamp, avant d'être approfondie de manière autonome.*
-
 ---
 
-## 📜 Licence
+## Licence
 Ce projet est destiné à un usage strictement éducatif et personnel dans le cadre d'un apprentissage de la sécurité défensive et de la gouvernance IT.
+Une partie des travaux et des labs présentés ici a été initiée et validée dans le cadre de mon cursus intensif Cybersecurity Fullstack & Lead chez Jedha Bootcamp, avant d'être approfondie de manière autonome.
