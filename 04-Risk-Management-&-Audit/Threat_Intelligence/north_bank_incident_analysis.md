@@ -1,9 +1,7 @@
-# Threat intelligence & APT analysis — mon apprentissage
+# Threat intelligence & APT analysis 
 
 **Module**: Introduction to threat intelligence  
 **Exercice**: Northbank financial group incident analysis  
-**Date**: mai 2026  
-**Statut**: ✓ complété
 
 ---
 
@@ -269,15 +267,3 @@ L'attaquant ne devient pas admin au jour 1. C'est une progression:
 Chaque étape ajoute de la complexité mais aussi réduit la détection.
 
 ---
-
-**Status**: ✓ Exercice compris et maîtrisé
-
-**Ce que j'ai appris**: Comment analyser une attaque réelle, mapper aux TTPs, identifier les APTs
-
-**Utilité**: 5/5
-
-**Application**: Incident response, threat hunting, detection engineering
-
----
-
-La vraie victoire ce n'est pas de bloquer un hash. C'est de comprendre les COMPORTEMENTS d'un attaquant pour construire une défense qui fonctionne contre tous ses variants.
