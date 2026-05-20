@@ -1,4 +1,4 @@
-# SQL employee management exercise — complete walkthrough
+# SQL employee management exercise  complete walkthrough
 
 **Exercice**: Employee management system with PostgreSQL  
 **Objectif**: Pratiquer CRUD operations (INSERT, SELECT, UPDATE, DELETE)  
