@@ -15,16 +15,6 @@ Le dépôt est organisé par blocs de compétences afin de maintenir une vision 
 
 ---
 
-## Environnement Technique
-
-Tous les outils et scripts présents ici sont testés et optimisés pour l'architecture suivante :
-* **OS** : macOS (Architecture ARM64 / Puce M3)
-* **Gestionnaire de packages** : Anaconda (Conda)
-* **Moteur d'exécution** : Python 3.13.x / Jupyter Server Local
-* **IDE** : VS Code (Environnement de test cloisonné en utilisateur non-privilégié)
-
----
-
 ## Objectifs de R&D
 
 1. **Maîtrise Technique (Fullstack)** : Développer des réflexes solides en programmation et en exploitation pour comprendre la logique sous-jacente des vulnérabilités.
