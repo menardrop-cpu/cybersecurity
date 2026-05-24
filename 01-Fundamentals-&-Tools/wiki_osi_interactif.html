@@ -1,0 +1,233 @@
+
+<h2 class="sr-only">Wiki interactif du modèle OSI — 7 couches, protocoles, et implications en cybersécurité</h2>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.osi-wrap{padding:1rem 0 2rem;font-size:14px}
+.osi-header{margin-bottom:1.5rem}
+.osi-header p{font-size:13px;color:var(--color-text-secondary);margin-top:4px;line-height:1.5}
+.layer-row{display:grid;grid-template-columns:36px 180px 1fr;gap:0;margin-bottom:4px;cursor:pointer;border-radius:var(--border-radius-md);transition:opacity .15s}
+.layer-row:hover{opacity:.85}
+.layer-num{display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;border-radius:var(--border-radius-md) 0 0 var(--border-radius-md);min-height:52px}
+.layer-label{display:flex;flex-direction:column;justify-content:center;padding:10px 14px;min-height:52px}
+.layer-label strong{font-size:13px;font-weight:500;line-height:1.2}
+.layer-label span{font-size:11px;margin-top:2px;opacity:.75}
+.layer-proto{display:flex;align-items:center;padding:10px 14px;gap:6px;flex-wrap:wrap;min-height:52px;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0}
+.pill{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500;white-space:nowrap}
+.detail-panel{margin-bottom:4px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-tertiary);overflow:hidden;display:none}
+.detail-panel.open{display:block}
+.detail-inner{padding:16px 18px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.detail-section strong{font-size:12px;font-weight:500;color:var(--color-text-secondary);display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:.04em}
+.detail-section p,.detail-section li{font-size:13px;color:var(--color-text-primary);line-height:1.6}
+.detail-section ul{padding-left:14px}
+.detail-section li{margin-bottom:3px}
+.attack-badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500;background:var(--color-background-danger);color:var(--color-text-danger);margin:2px 3px 2px 0}
+.tool-badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500;background:var(--color-background-secondary);color:var(--color-text-secondary);margin:2px 3px 2px 0;border:0.5px solid var(--color-border-secondary)}
+.example-box{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px 12px;margin-top:8px;font-size:12px;line-height:1.6;color:var(--color-text-primary);font-family:var(--font-mono)}
+.detail-header{padding:10px 18px 8px;border-bottom:0.5px solid var(--color-border-tertiary);display:flex;align-items:center;gap:10px}
+.detail-header .lnum{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500}
+.detail-header h3{font-size:14px;font-weight:500}
+.legend{display:flex;gap:16px;margin-bottom:14px;flex-wrap:wrap}
+.legend-item{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--color-text-secondary)}
+.legend-dot{width:10px;height:10px;border-radius:50%}
+.separator{display:flex;align-items:center;gap:8px;margin:8px 0 4px;font-size:11px;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.05em}
+.separator::before,.separator::after{content:'';flex:1;height:0.5px;background:var(--color-border-tertiary)}
+.flow-diagram{padding:12px 0 4px;display:flex;align-items:center;gap:0;font-size:12px;overflow-x:auto}
+.flow-box{padding:6px 10px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);white-space:nowrap;color:var(--color-text-primary);font-size:12px}
+.flow-arrow{padding:0 6px;color:var(--color-text-tertiary);font-size:14px}
+.full-detail{grid-column:1/-1}
+</style>
+
+<div class="osi-wrap">
+<div class="osi-header">
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#534AB7"></div>Application (hautes)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#0F6E56"></div>Transport</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#854F0B"></div>Réseau</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#185FA5"></div>Physique/Liaison (basses)</div>
+  </div>
+</div>
+
+<div id="layers-container"></div>
+
+<div class="separator">flux d'une requête HTTP — empilement des couches</div>
+<div class="flow-diagram">
+  <div class="flow-box" style="border-color:#534AB7;color:#534AB7">Navigateur (C7)</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-box" style="border-color:#534AB7">Session TLS (C5)</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-box" style="border-color:#0F6E56">TCP :443 (C4)</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-box" style="border-color:#854F0B">IP packet (C3)</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-box" style="border-color:#185FA5">Ethernet frame (C2)</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-box" style="border-color:#185FA5">Signal (C1)</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-box">Serveur</div>
+</div>
+<p style="font-size:12px;color:var(--color-text-secondary);margin-top:8px">Clique sur chaque couche pour explorer ses protocoles, son rôle, et les vecteurs d'attaque associés.</p>
+</div>
+
+<script>
+const layers = [
+  {
+    num:7, name:"Application", en:"Application", color:"#534AB7", bg:"#EEEDFE", textColor:"#3C3489",
+    tagline:"Ce que voit l'utilisateur",
+    protocols:["HTTP/S","DNS","FTP","SMTP","SSH","IMAP","RDP","SNMP"],
+    pillBg:"#EEEDFE", pillColor:"#3C3489",
+    what:"La couche que tu touches directement quand tu ouvres un navigateur. Elle définit comment les applications communiquent — le langage, les règles, le format des échanges. HTTP n'existe qu'ici.",
+    example:"GET /login HTTP/1.1\nHost: target.com\nUser-Agent: Mozilla/5.0\nCookie: session=abc123",
+    exLabel:"Requête HTTP brute (visible dans Burp)",
+    attacks:["SQLi","XSS","CSRF","SSRF","XXE","Template Injection","JWT manipulation","Path traversal","IDOR"],
+    tools:["Burp Suite","SQLmap","OWASP ZAP","ffuf","gobuster"],
+    note:"C'est ici que Burp Suite opère. 90% du pentest web se joue à cette couche — toutes les injections, toutes les manipulations de tokens, tout ce qui touche à la logique applicative."
+  },
+  {
+    num:6, name:"Présentation", en:"Presentation", color:"#534AB7", bg:"#EEEDFE", textColor:"#3C3489",
+    tagline:"Encodage, chiffrement, compression",
+    protocols:["TLS/SSL","Base64","ASCII","JPEG","MPEG","JSON","XML"],
+    pillBg:"#EEEDFE", pillColor:"#3C3489",
+    what:"Traduit les données pour que les deux extrémités se comprennent. Elle gère l'encodage (UTF-8, Base64), la compression (gzip), et surtout le chiffrement (TLS). C'est elle qui transforme tes données HTTP en HTTPS.",
+    example:"Données brutes → chiffrées par TLS\n-----BEGIN CERTIFICATE-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCg==\n-----END CERTIFICATE-----",
+    exLabel:"Certificat TLS (couche 6)",
+    attacks:["SSL stripping","Downgrade attack (POODLE, BEAST)","Weak cipher negotiation","Cert spoofing"],
+    tools:["sslstrip","testssl.sh","Wireshark","SSLscan"],
+    note:"En pentest, tu cherches à forcer un downgrade de TLS 1.3 vers TLS 1.0, ou à exploiter des algorithmes faibles (RC4, DES). Si TLS est mal configuré, tu peux intercepter du trafic 'chiffré'."
+  },
+  {
+    num:5, name:"Session", en:"Session", color:"#534AB7", bg:"#EEEDFE", textColor:"#3C3489",
+    tagline:"Établit et maintient les connexions",
+    protocols:["SMB","NetBIOS","RPC","PPTP","L2TP","SQL sessions","OAuth sessions"],
+    pillBg:"#EEEDFE", pillColor:"#3C3489",
+    what:"Gère l'ouverture, le maintien et la fermeture d'une session entre deux machines. C'est elle qui décide quand une connexion commence et finit — et comment les échanges alternent (half-duplex vs full-duplex).",
+    example:"SMB session establishment :\nNEGOTIATE → SESSION_SETUP → TREE_CONNECT\n→ [authenticated session maintenue]",
+    exLabel:"Établissement de session SMB",
+    attacks:["Session fixation","Pass-the-Hash","SMB relay","EternalBlue (MS17-010)","Credential capture"],
+    tools:["Impacket","CrackMapExec","Responder","Metasploit"],
+    note:"SMB tourne sur cette couche — et EternalBlue (WannaCry) l'a exploitée. En pentest interne, Responder capture des hashes NTLM via des sessions SMB forgées."
+  },
+  {
+    num:4, name:"Transport", en:"Transport", color:"#0F6E56", bg:"#E1F5EE", textColor:"#085041",
+    tagline:"Fiabilité de bout en bout",
+    protocols:["TCP","UDP","QUIC","SCTP","TLS (handshake)"],
+    pillBg:"#E1F5EE", pillColor:"#085041",
+    what:"Assure que les données arrivent complètes et dans l'ordre (TCP), ou les balance à toute vitesse sans garantie (UDP). TCP fait un handshake en 3 étapes avant tout échange : SYN → SYN-ACK → ACK.",
+    example:"TCP 3-way handshake :\n[Client] SYN       →  [Serveur]\n[Client]  ← SYN-ACK [Serveur]\n[Client] ACK       →  [Serveur]\n→ connexion établie, HTTP commence",
+    exLabel:"Handshake TCP avant tout trafic HTTP",
+    attacks:["SYN flood (DoS)","Port scanning","TCP session hijacking","UDP flood","QUIC bypass"],
+    tools:["nmap","hping3","netcat","Wireshark","masscan"],
+    note:"nmap opère massivement sur cette couche — il envoie des SYN et analyse les réponses pour cartographier les ports ouverts. Un SYN sans ACK final = scan furtif (stealth scan)."
+  },
+  {
+    num:3, name:"Réseau", en:"Network", color:"#854F0B", bg:"#FAEEDA", textColor:"#633806",
+    tagline:"Routage entre machines distantes",
+    protocols:["IP","ICMP","ARP (partiellement)","BGP","OSPF","IGMP"],
+    pillBg:"#FAEEDA", pillColor:"#633806",
+    what:"Gère l'adressage logique (adresses IP) et le routage — comment un paquet traverse plusieurs réseaux pour arriver à destination. Sans couche 3, tu ne quittes pas ton réseau local.",
+    example:"Entête IP d'un paquet :\nVersion: 4  TTL: 64\nSrc: 192.168.1.42\nDst: 93.184.216.34\nProtocol: TCP (6)",
+    exLabel:"Entête IPv4 — TTL révèle souvent l'OS cible",
+    attacks:["IP spoofing","ICMP smurf","Traceroute mapping","TTL manipulation","BGP hijacking"],
+    tools:["nmap","traceroute","hping3","Scapy","Wireshark"],
+    note:"Le TTL (Time To Live) dans l'entête IP révèle souvent l'OS : Windows démarre à 128, Linux/Unix à 64. En pentest, c'est un fingerprint passif rapide."
+  },
+  {
+    num:2, name:"Liaison", en:"Data Link", color:"#185FA5", bg:"#E6F1FB", textColor:"#0C447C",
+    tagline:"Communication sur le même réseau",
+    protocols:["Ethernet","Wi-Fi (802.11)","ARP","PPP","Bluetooth","VLAN 802.1Q"],
+    pillBg:"#E6F1FB", pillColor:"#0C447C",
+    what:"Gère la communication entre deux machines directement connectées (même réseau local). Elle utilise des adresses MAC (physiques) plutôt qu'IP. C'est ici que ARP fait la correspondance MAC ↔ IP.",
+    example:"ARP request (broadcast) :\nWho has 192.168.1.1?\nTell 192.168.1.42\n\nARP reply :\n192.168.1.1 is at aa:bb:cc:dd:ee:ff",
+    exLabel:"ARP — traduction IP → MAC sur le LAN",
+    attacks:["ARP spoofing/poisoning","MAC flooding","VLAN hopping","802.1X bypass","Rogue AP"],
+    tools:["arpspoof","ettercap","Bettercap","Wireshark","aircrack-ng"],
+    note:"ARP spoofing = tu réponds à toutes les requêtes ARP du réseau en disant 'c'est moi la gateway'. Tout le trafic passe par toi → Man-in-the-Middle classique en réseau interne."
+  },
+  {
+    num:1, name:"Physique", en:"Physical", color:"#185FA5", bg:"#E6F1FB", textColor:"#0C447C",
+    tagline:"Le signal brut",
+    protocols:["RJ45","Fibre optique","Wi-Fi (signal radio)","Bluetooth","USB","HDMI"],
+    pillBg:"#E6F1FB", pillColor:"#0C447C",
+    what:"Le niveau zéro — des bits (0 et 1) transportés par un signal électrique, lumineux ou radio. Pas de logique, pas de protocole : juste de la physique. Un câble Ethernet, une antenne Wi-Fi, c'est la couche 1.",
+    example:"Signal Ethernet (exemple simplifié) :\n10101100 00100111 11001010...\n→ 1 = +2.5V / 0 = -2.5V\nDébit : 1 Gbps = 10⁹ bits/sec",
+    exLabel:"Représentation binaire d'un signal physique",
+    attacks:["Tap physique","Rogue hardware (USB rubber ducky)","Wi-Fi evil twin","Physical keylogger","Wiretapping"],
+    tools:["HackRF","Flipper Zero","USB Rubber Ducky","Wireshark (mode promiscuous)","SDR"],
+    note:"Un 'drop USB' (clé USB abandonnée sur un parking) exploite la couche 1. Quand quelqu'un la branche, le système voit un clavier légitime — c'est le principe du Rubber Ducky."
+  }
+];
+
+const container = document.getElementById('layers-container');
+let openLayer = null;
+
+layers.forEach((l,i) => {
+  const rowId = 'row-'+l.num;
+  const panelId = 'panel-'+l.num;
+
+  const row = document.createElement('div');
+  row.className = 'layer-row';
+  row.id = rowId;
+  row.setAttribute('role','button');
+  row.setAttribute('aria-expanded','false');
+  row.setAttribute('aria-controls', panelId);
+
+  const pillsHTML = l.protocols.slice(0,5).map(p =>
+    `<span class="pill" style="background:${l.pillBg};color:${l.pillColor}">${p}</span>`
+  ).join('') + (l.protocols.length > 5 ? `<span class="pill" style="background:var(--color-background-secondary);color:var(--color-text-secondary)">+${l.protocols.length-5}</span>` : '');
+
+  row.innerHTML = `
+    <div class="layer-num" style="background:${l.color};color:#fff;border-radius:var(--border-radius-md) 0 0 var(--border-radius-md)">${l.num}</div>
+    <div class="layer-label" style="background:${l.bg};border-top:0.5px solid ${l.color}22;border-bottom:0.5px solid ${l.color}22">
+      <strong style="color:${l.textColor}">${l.name}</strong>
+      <span style="color:${l.textColor}">${l.tagline}</span>
+    </div>
+    <div class="layer-proto" style="background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-left:none">
+      ${pillsHTML}
+    </div>
+  `;
+
+  const panel = document.createElement('div');
+  panel.className = 'detail-panel';
+  panel.id = panelId;
+
+  const attacksHTML = l.attacks.map(a => `<span class="attack-badge">${a}</span>`).join('');
+  const toolsHTML = l.tools.map(t => `<span class="tool-badge">${t}</span>`).join('');
+
+  panel.innerHTML = `
+    <div class="detail-header" style="background:${l.bg}">
+      <div class="lnum" style="background:${l.color};color:#fff">${l.num}</div>
+      <h3 style="color:${l.textColor}">Couche ${l.num} — ${l.name} <span style="font-weight:400;color:${l.textColor};opacity:.6">(${l.en})</span></h3>
+    </div>
+    <div class="detail-inner">
+      <div class="detail-section">
+        <strong>Rôle</strong>
+        <p>${l.what}</p>
+        <div class="example-box">${l.example}<br><br><span style="color:var(--color-text-tertiary)"># ${l.exLabel}</span></div>
+      </div>
+      <div class="detail-section">
+        <strong>Protocoles clés</strong>
+        <div style="margin-bottom:12px">${l.protocols.map(p=>`<span class="pill" style="background:${l.pillBg};color:${l.textColor};margin:2px 3px 2px 0;display:inline-block">${p}</span>`).join('')}</div>
+        <strong>Vecteurs d'attaque</strong>
+        <div style="margin-bottom:12px">${attacksHTML}</div>
+        <strong>Outils pentest</strong>
+        <div style="margin-bottom:12px">${toolsHTML}</div>
+        <strong style="color:var(--color-text-danger)">Note pentest</strong>
+        <p style="color:var(--color-text-primary);margin-top:4px">${l.note}</p>
+        <button onclick="sendPrompt('Explique-moi en détail les attaques sur la couche ${l.num} OSI (${l.name}) et comment les exploiter avec Burp Suite ou d\\'autres outils')" style="margin-top:12px;font-size:12px">Explorer les attaques couche ${l.num} ↗</button>
+      </div>
+    </div>
+  `;
+
+  row.addEventListener('click', () => {
+    const isOpen = panel.classList.contains('open');
+    if(openLayer && openLayer !== panel) {
+      openLayer.classList.remove('open');
+    }
+    panel.classList.toggle('open', !isOpen);
+    row.setAttribute('aria-expanded', !isOpen);
+    openLayer = isOpen ? null : panel;
+  });
+
+  container.appendChild(row);
+  container.appendChild(panel);
+});
+</script>
