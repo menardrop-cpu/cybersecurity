@@ -4,20 +4,19 @@
 ![Language](https://img.shields.io/badge/Language-Bash-blue)
 ![Focus](https://img.shields.io/badge/Focus-Cybersecurity-red)
 
-Ce dépôt centralise exclusivement mes travaux pratiques, exercices de configuration et scripts réalisés dans le cadre de ma formation (Jedha Fullstack & Lead). Il documente l'application concrète de mes apprentissages techniques à travers des architectures de test, des déploiements et des simulations.
+Ce dépôt centralise exclusivement mes travaux pratiques, exercices de configuration et scripts réalisés dans le cadre de ma formation Jedha Fullstack. 
 
 ---
 
-## Architecture du Répertoire
+## 📂 Structure
 
-Les environnements de test et les livrables techniques sont structurés par domaine d'expertise pour faciliter la navigation :
+Les environnements de test et les livrables techniques sont structurés par domaine d'expertise pour faciliter la navigation et le déploiement :
 
 | Répertoire | Contenu & Objectifs Pratiques |
 | :--- | :--- |
-| **`/01-Fondamentaux`** | Automatisation, scripting système (Unix, Bash) et développement de scripts Python appliqués à la sécurité. |
-| **`/02-Infrastructure`** | Déploiement d'architectures durcies (Guide GNS3), configuration réseau, conteneurisation et implémentation de la sécurité des messageries (SPF, DKIM, DMARC). |
-| **`/03-Offensive-Lab`** | Preuves de concept (PoC) sur l'exploitation de vulnérabilités (Top 10 OWASP) et l'élévation de privilèges au sein d'environnements de laboratoire isolés. |
-| **`/04-GRC-Audit`** | Applications pratiques d'analyse de la menace, cartographie via le framework MITRE ATT&CK et manipulation d'OpenCTI. |
+| **`Audits`** | Rapports de Pentest, analyse de menaces (Threat Intel), cartographie MITRE ATT&CK et conformité GRC. |
+| **`Red-Team`** | Laboratoires offensifs, exploitation de vulnérabilités (OWASP Top 10), privEsc et challenges CTF. |
+| **`Fondamentaux`** | Automatisation système (Bash/Python), scripting d'administration et socle de sécurité réseau. |
 
 ---
 
