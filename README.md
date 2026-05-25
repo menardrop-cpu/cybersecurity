@@ -17,7 +17,7 @@ Pour faciliter la lecture, les documents et environnements de test sont réparti
 | **`/study-notes`** | *Fiches de synthèse et mémos techniques issus du cursus de formation.* |
 
 > **Note sur l'OSINT :**
-> L'investigation en sources ouvertes étant une discipline autonome avec ses propres outils et méthodologies de mise à jour, l'ensemble des fiches dédiées à l'OSINT est maintenu indépendamment dans le dépôt : [osint.wiki](https://github.com/menardrop-cpu/osint.wiki).
+> L'investigation en sources ouvertes étant une discipline autonome avec ses propres outils et méthodologies de mise à jour, l'ensemble des fiches dédiées à l'OSINT est maintenu indépendamment dans le dépôt : [https://github.com/menardrop-cpu/osint](https://github.com/menardrop-cpu/osint)
 
 ---
 
