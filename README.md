@@ -1,28 +1,24 @@
-# Cybersécurité : Notes d'apprentissage et de laboratoire
+# Cybersécurité : Laboratoire et application pratique
 
-Ce dépôt centralise mes travaux pratiques, configurations et notes d'apprentissage réalisés dans le cadre de ma formation Fullstack & Lead (Jedha). Il documente ma progression technique à travers quatre domaines clés, avec un intérêt particulier pour les enjeux d'infrastructure et de Gouvernance, Risque et Conformité (GRC).
+Ce dépôt centralise exclusivement mes travaux pratiques, exercices de configuration et scripts réalisés dans le cadre de ma formation (Jedha Fullstack & Lead). Il documente l'application concrète de mes apprentissages techniques à travers des architectures de test, des déploiements et des simulations.
 
 ---
 
-## Structure du dépôt
+## Architecture du Répertoire
 
-Pour faciliter la lecture, les documents et environnements de test sont répartis dans les répertoires suivants :
+Les environnements de test et les livrables techniques sont structurés par domaine d'expertise pour faciliter la navigation :
 
-| Répertoire | Contenu & Objectifs |
+| Répertoire | Contenu & Objectifs Pratiques |
 | :--- | :--- |
-| **`/01-Fondamentaux`** | Automatisation et scripting système (Unix, Bash, Python appliqués à la sécurité). |
-| **`/02-Infrastructure`** | Concepts d'architectures durcies (Guide SNG3), sécurité des réseaux et des messageries (SPF/DKIM/DMARC). |
-| **`/03-Offensive-Lab`** | Notes d'étude sur l'exploitation des vulnérabilités (Top 10 OWASP, bases de l'élévation de privilèges). |
-| **`/04-GRC-Audit`** | Initiation à l'analyse de la menace (MITRE ATT&CK, introduction à OpenCTI) et modes opératoires. |
-| **`/study-notes`** | *Fiches de synthèse et mémos techniques issus du cursus de formation.* |
-
-> **Note sur l'OSINT :**
-> L'investigation en sources ouvertes étant une discipline autonome avec ses propres outils et méthodologies de mise à jour, l'ensemble des fiches dédiées à l'OSINT est maintenu indépendamment dans le dépôt : [https://github.com/menardrop-cpu/osint](https://github.com/menardrop-cpu/osint)
+| **`/01-Fondamentaux`** | Automatisation, scripting système (Unix, Bash) et développement de scripts Python appliqués à la sécurité. |
+| **`/02-Infrastructure`** | Déploiement d'architectures durcies (Guide SNG3), configuration réseau, conteneurisation et implémentation de la sécurité des messageries (SPF, DKIM, DMARC). |
+| **`/03-Offensive-Lab`** | Preuves de concept (PoC) sur l'exploitation de vulnérabilités (Top 10 OWASP) et l'élévation de privilèges au sein d'environnements de laboratoire isolés. |
+| **`/04-GRC-Audit`** | Applications pratiques d'analyse de la menace, cartographie via le framework MITRE ATT&CK et manipulation d'OpenCTI. |
 
 ---
 
-## Contexte et finalité
+## Contexte 
 
-L'objectif de ce répertoire est de consolider mes acquis techniques pour soutenir une approche analytique de la cybersécurité. Les contenus marqués comme notes de cours (dans `/study-notes`) sont partagés à titre de référence personnelle et n'ont pas vocation à se substituer aux documentations officielles.
+L'objectif de ce répertoire est de consolider mes acquis techniques par la pratique, afin de soutenir une approche analytique de la cybersécurité. Les codes, requêtes et configurations présentés ici constituent des livrables d'entraînement et d'expérimentation.
 
 *Dernière mise à jour de la structure : Mai 2026*
