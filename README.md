@@ -1,8 +1,8 @@
 # Cybersécurité : Laboratoire et application pratique
 
-![Status](https://img.shields.io/badge/Status-Active-brightgreen)
+![Status](https://img.shields.io/badge/Status-Actif-brightgreen)
 ![Language](https://img.shields.io/badge/Language-Bash-blue)
-![Focus](https://img.shields.io/badge/Focus-Cybersecurity-red)
+![Focus](https://img.shields.io/badge/Focus-Cybersecurité-red)
 
 Ce dépôt centralise exclusivement mes travaux pratiques, exercices de configuration et scripts réalisés dans le cadre de ma formation Jedha Fullstack. 
 
