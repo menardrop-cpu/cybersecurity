@@ -11,7 +11,7 @@ Les environnements de test et les livrables techniques sont structurés par doma
 | Répertoire | Contenu & Objectifs Pratiques |
 | :--- | :--- |
 | **`/01-Fondamentaux`** | Automatisation, scripting système (Unix, Bash) et développement de scripts Python appliqués à la sécurité. |
-| **`/02-Infrastructure`** | Déploiement d'architectures durcies (Guide SNG3), configuration réseau, conteneurisation et implémentation de la sécurité des messageries (SPF, DKIM, DMARC). |
+| **`/02-Infrastructure`** | Déploiement d'architectures durcies (Guide GNS3), configuration réseau, conteneurisation et implémentation de la sécurité des messageries (SPF, DKIM, DMARC). |
 | **`/03-Offensive-Lab`** | Preuves de concept (PoC) sur l'exploitation de vulnérabilités (Top 10 OWASP) et l'élévation de privilèges au sein d'environnements de laboratoire isolés. |
 | **`/04-GRC-Audit`** | Applications pratiques d'analyse de la menace, cartographie via le framework MITRE ATT&CK et manipulation d'OpenCTI. |
 
