@@ -16,7 +16,7 @@ Ce rapport documente l'exploitation d'une vulnérabilité d'injection de templat
 - **Application** : Lab Jedha `template_injection`
 - **URL** : `http://10.10.3.17/`
 - **Surface d'attaque** : Formulaire web avec champ email
-- **Stack présumée** : Python + Flask + Jinja2
+- **Stack** : Python + Flask + Jinja2
 
 ### Outils utilisés
 - Burp Suite Community (proxy HTTP, Repeater, Decoder)
