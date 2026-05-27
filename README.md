@@ -1,4 +1,4 @@
-# Cybersécurité : Laboratoire Pratique
+# Cybersécurity lab
 
 ![Status](https://img.shields.io/badge/Status-In%20Progress-blue)
 ![Language](https://img.shields.io/badge/Language-FR-green)
@@ -19,8 +19,8 @@ Je vise **GRC et threat intelligence**.
 
 ## Mes productions originales
 
-- **[osint-wiki](https://github.com/menardrop-cpu/osint-wiki)** — Référentiel OSINT structuré 
-- **[grc-foundations](https://github.com/menardrop-cpu/grc-foundations)** — Notes GRC : ISO 27001, NIST CSF, vendor risk
+- **[osint-wiki](https://github.com/menardrop-cpu/osint-wiki)** : Référentiel OSINT structuré 
+- **[grc-foundations](https://github.com/menardrop-cpu/grc-foundations)** : Notes GRC : ISO 27001, NIST CSF, vendor risk
 
 ## En cours
 
