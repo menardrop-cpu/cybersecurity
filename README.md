@@ -1,4 +1,4 @@
-# Cybersécurity lab
+# Cybersecurity lab
 
 ![Status](https://img.shields.io/badge/Status-In%20Progress-blue)
 ![Language](https://img.shields.io/badge/Language-FR-green)
