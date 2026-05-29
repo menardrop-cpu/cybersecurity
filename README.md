@@ -48,17 +48,6 @@ Ces deux repos sont des **outils que j'utilise et raffine** à chaque audit.
 * **MITRE ATT&CK** / mapping des TTPs adversaire
 * **CVSS v3.1** / scoring des vulnérabilités
 
----
-
-## Ce que j'ai appris (Jedha)
-
-**Fondamentaux** : Bash, Python, SQL, networking, concepts de sécurité
-
-**Red-Team** : Exploitation web (injection, XSS, CSRF, authentication), reconnaissance, metasploit, kernel exploits
-
-**Audits** : Méthodologie pentest, reporting, risk scoring, recommandations métier
-
-**Infrastructure** : Docker, déploiements sécurisés, architecture défensive
 
 ---
 
